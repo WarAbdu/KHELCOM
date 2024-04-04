@@ -1,3 +1,4 @@
+USE boutik
 CREATE TABLE clients(
     client_id INT(10)PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(100)NOT NULL,
@@ -5,7 +6,7 @@ CREATE TABLE clients(
     );
       
 CREATE TABLE Produits(
-    Produits_id INT(20)PRIMARY KEY AUTO_INCREMENT,
+    Produits_id INT PRIMARY KEY AUTO_INCREMENT,
     nom VARCHAR(110)NOT NULL,
     prix INT CHECK(prix>0)
     );
@@ -14,8 +15,8 @@ CREATE TABLE Commandes(
     commandes_id INT PRIMARY KEY,
    client_id INT(10) NOT NULL,
    produits_id INT(20) NOT NULL,   
-   CONSTRAINT FOREIGN KEY(client_id) REFERENCES clients(client_id)on DELETE CASCADE on UPDATE CASCADE, 
-   CONSTRAINT FOREIGN KEY(Produits_id) REFERENCES Produits(Produits_id)on DELETE CASCADE on UPDATE CASCADE,
+   CONSTRAINT FOREIGN KEY(client_id) REFERENCES clients(client_id), 
+   CONSTRAINT FOREIGN KEY(Produits_id) REFERENCES Produits(Produits_id),
    quantite INT NOT NULL,
-   Date_de_commande DATE NOT NULL)
+   Date_de_commande DATE NOT NULL
    );
