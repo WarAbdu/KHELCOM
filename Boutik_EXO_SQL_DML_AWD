@@ -1,0 +1,75 @@
+       —- tableau des produits
+ INSERT INTO produits Enregistrement 1 (produits_id,nom, prix)
+INSERT INTO `produits`(`Produits_id`, `nom`, `prix`) VALUES ('produit_id','cookies','10');
+
+
+
+ INSERT INTO produits Enregistrement 2 (produits_id, nom , prix )
+INSERT INTO `produits`(`Produits_id`, `nom`, `prix`) VALUES ('produit_id','Candy','5.2');
+
+
+
+
+     —- tableau des clients
+  
+       INSERT INTO clients Enregistrement 1 (Ahmed,”Tunis” );        clients_id=1
+INSERT INTO `clients`(`client_id`, `nom`, `addresse`) VALUES ('1','Ahmed','Tunis');
+
+
+  
+       INSERT INTO client Enregistrement 2 (Coulibaly,”Sénégal” );    clients_id=2
+INSERT INTO `clients`(`client_id`, `nom`, `addresse`) VALUES ('2','Coulibaly','Sénégal');
+
+
+
+       INSERT INTO clients Enregistrement 3 (Hasan,”Egypte” );       clients_id=3
+INSERT INTO `clients`(`client_id`, `nom`, `addresse`) VALUES ('3','Hasan','Egypte');
+
+
+
+
+     — tableau des commandes
+   INSERT INTO commandes Enregistrement 1,2 (costumerid,productid,quantité,order_date) 
+       INSERT INTO commandes Enregistrement 1(1,2,3,20230122)      commandes id=0
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produits_id`, `quantite`, `Date_de_commande`) VALUES ('0','1','2','3','20230122')
+      
+ INSERT INTO commandes Enregistrement 2(2,1,10,20230414)        commandes_id=6
+INSERT INTO `commandes`( `commandes_id`,`client_id`, `produits_id`, `quantite`, `Date_de_commande`) VALUES (6,2,1,10,20230414);
+ 
+   2– Màj  valeur quantité de la deuxième commande
+                quantité=6
+ 
+     UPDATE commandes
+     SET quantité=6
+  WHERE commandes_ id=6
+UPDATE `commandes` SET `quantite`='6' WHERE commandes_id = 6;
+
+
+
+      
+    3 -– Supprimons le troisième client de la table clients  
+          DELETE FROM clients 
+         WHERE Enregistrement 3( Hasan,”Egypte”)
+DELETE FROM `clients` WHERE client_id=3;
+
+
+
+
+   5 –- Supprimons le contenu du  tableau commandes
+              DELETE FROM commandes
+DELETE FROM `commandes` WHERE commandes_id=11;
+
+
+
+
+      —  Supprimer la table commandes 
+           
+DROP table commandes;
+
+
+
+
+
+
+
+      
