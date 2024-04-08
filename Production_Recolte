@@ -1,0 +1,23 @@
+
+CREATE TABLE WINE (
+    WINE_id INT PRIMARY KEY AUTO_INCREMENT,
+    Categorie VARCHAR(100)NOT NULL,
+     Year INT NOT NULL,
+     Degree INT NOT NULL
+    );
+      
+CREATE TABLE Producer (
+    Producer_id INT PRIMARY KEY AUTO_INCREMENT,
+    First_name VARCHAR(110)NOT NULL,
+    Last_name VARCHAR (100),
+    Region INT
+    );
+       
+CREATE TABLE Harvest (
+  Harvrest_id INT PRIMARY KEY,
+   WINE_id INT NOT NULL,
+   producer_id INT NOT NULL,   
+   CONSTRAINT FOREIGN KEY(WINE_id) REFERENCES WINE (WINE_id), 
+   CONSTRAINT FOREIGN KEY(Producer_id) REFERENCES Producer(Producer_id),  
+   quantity INT NOT NULL
+    );
