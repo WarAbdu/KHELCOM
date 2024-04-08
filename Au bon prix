@@ -1,0 +1,60 @@
+                  
+CREATE TABLE client (
+    client_id INT PRIMARY KEY AUTO_INCREMENT,
+    nom_client VARCHAR(100)NOT NULL,
+    Tel_client VARCHAR(100) NOT NULL
+    );
+      
+CREATE TABLE Produit(
+    Produit_id INT PRIMARY KEY AUTO_INCREMENT,
+    nom_produit VARCHAR(110)NOT NULL,
+    Categorie VARCHAR (100),
+    prix INT CHECK(prix>0)
+    );
+       
+CREATE TABLE Commandes(
+    commandes_id INT PRIMARY KEY,
+   client_id INT NOT NULL,
+   produit_id INT NOT NULL,   
+   CONSTRAINT FOREIGN KEY(client_id) REFERENCES client (client_id), 
+   CONSTRAINT FOREIGN KEY(Produit_id) REFERENCES Produits(Produits_id),
+   Datedecommande DATE NOT NULL,
+      quantite INT NOT NULL,
+  Montanttotal INT NOT NULL
+   );
+
+
+    INSERT INTO client(Client_id,nom_client,tel_client) VALUES ( 11,'Abdou',+221776838889);
+
+
+    INSERT INTO client(Client_id,nom_client,tel_client) VALUES (6,'Assata',+221767205556);
+
+
+    INSERT INTO client(Client_id,nom_client,tel_client) VALUES (7,'Soukeye',+221789999999);
+
+
+
+INSERT INTO produit(produit_id,nom_produit,categorie,prix) VALUES(8,'boitiergeoloc','Widgets',8000);
+
+
+INSERT INTO produit(produit_id,nom_produit,categorie,prix) VALUES(9,'minicamera','Gadjet',15000);
+
+
+
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `quantite`, `Datedecommande`,'Montanttotal) VALUES ('10','11','8','3','20240406','24000');
+WHERE Montanttotal=(prix*quantite) 
+SELECT Montanttotal
+FROM commandes 
+
+SELECT client, AVG(prix)
+ FROM commandes
+ GROUP BY client
+
+
+
+
+
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `quantite`, `Datedecommande`,'Montanttotal) VALUES ('12','6','9','2','20240406','30000');
+INSERT INTO `commandes`(`commandes_id  `, `client_id`, `produit_id * `, `quantite`, `Datedecommande`,'Montanttotal) VALUES ('13','7',"11;9",'1','20240407','540000');
+
+
