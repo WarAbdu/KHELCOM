@@ -2,7 +2,7 @@
 CREATE TABLE WINE (
     WINE_id INT PRIMARY KEY AUTO_INCREMENT,
     Categorie VARCHAR(100)NOT NULL,
-     Year INT NOT NULL,
+     Year DATE NOT NULL,
      Degree INT NOT NULL
     );
       
@@ -10,7 +10,7 @@ CREATE TABLE Producer (
     Producer_id INT PRIMARY KEY AUTO_INCREMENT,
     First_name VARCHAR(110)NOT NULL,
     Last_name VARCHAR (100),
-    Region INT
+    Region VACHAR (150)
     );
        
 CREATE TABLE Harvest (
@@ -19,5 +19,56 @@ CREATE TABLE Harvest (
    producer_id INT NOT NULL,   
    CONSTRAINT FOREIGN KEY(WINE_id) REFERENCES WINE (WINE_id), 
    CONSTRAINT FOREIGN KEY(Producer_id) REFERENCES Producer(Producer_id),  
-   quantity INT NOT NULL
+   quantity VARCHAR(150) NOT NULL
     );
+Inserons les données dans les tables
+Create table WINE
+ INSERT INTO `wine`(`WINE_id`, `Categorie`, `Year`, `Degree`) VALUES ('11','Vinblanc',1980,70);
+
+Create table Producer
+INSERT INTO `producer`(`Producer_id`, `First_name`, `Last_name`, `Region`) VALUES (11,'JACK','MIMRA','RICHARTOL');
+INSERT INTO `producer`(`Producer_id`, `First_name`, `Last_name`, `Region`) VALUES (12,'Patrick','LAFON','SOUSSE');
+INSERT INTO `producer`(`Producer_id`, `First_name`, `Last_name`, `Region`) VALUES (13,'Marie','LATOUCH','SOUSSE');
+
+Create table Harvest
+INSERT INTO `harvest`(`Harvrest_id`, `WINE_id`, `producer_id`, `quantity`) VALUES (11,11,11,'500000litres');
+INSERT INTO `harvest`(`Harvrest_id`, `WINE_id`, `producer_id`, `quantity`) VALUES (12,11,12,'700000litres');
+INSERT INTO `harvest`(`Harvrest_id`, `WINE_id`, `producer_id`, `quantity`) VALUES (13,11,13,'1000000litres');
+
+Liste des Producteurs
+SELECT* FROM 'Producer';
+
+Liste des producteurs triée par nom
+ SELECT ALL First_name,Last_name FROM Producer
+
+La liste des producteurs de Sousse
+SELECT ALL First_name,Last_name FROM Producer WHERE Region LIKE 'SOUSSE';
+
+Quantité totale de vin produit portant le num 12
+SELECT Quantity FROM `harvest` WHERE producer_id=12;
+
+La quantité de vin produite par catégorie.
+
+ INSERT INTO `wine`(`WINE_id`, `Categorie`, `Year`, `Degree`) VALUES ('12','VinRouge',1990,80);
+INSERT INTO `wine`(`WINE_id`, `Categorie`, `Year`, `Degree`) VALUES ('13','Champagne',2000,80);
+
+
+
+
+SELECT ALL Quantity FROM harvest INNER JOIN WINE ON Categorie;
+
+
+SELECT ALL Categorie FROM WINE INNER JOIN Harvest ON Quantity;
+
+Categorie	
+vinblanc
+vinblanc
+vinblanc
+VinRouge
+VinRouge
+VinRouge
+Champagne
+Champagne
+Champagne
+
+Quels producteurs de la région de Sousse ont récolté au moins un vin en quantité supérieure à 300 litres ? Nous souhaitons les noms et prénoms des producteurs, triés par ordre alphabétique.
