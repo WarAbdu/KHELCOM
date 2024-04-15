@@ -1,4 +1,3 @@
-                  
 CREATE TABLE client (
     client_id INT PRIMARY KEY AUTO_INCREMENT,
     nom_client VARCHAR(100)NOT NULL,
@@ -24,7 +23,7 @@ CREATE TABLE Commandes(
    );
 
 
-    INSERT INTO client(Client_id,nom_client,tel_client) VALUES ( 11,'Abdou',+221776838889);
+    INSERT INTO client(Client_id,nom_client,tel_client) VALUES ( 11,'Abdou',+221775000000);
 
 
     INSERT INTO client(Client_id,nom_client,tel_client) VALUES (6,'Assata',+221767205556);
@@ -41,20 +40,26 @@ INSERT INTO produit(produit_id,nom_produit,categorie,prix) VALUES(9,'minicamera'
 
 
 
-INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `quantite`, `Datedecommande`,'Montanttotal) VALUES ('10','11','8','3','20240406','24000');
-WHERE Montanttotal=(prix*quantite) 
-SELECT Montanttotal
-FROM commandes 
-
-SELECT client, AVG(prix)
- FROM commandes
- GROUP BY client
 
 
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`) VALUES (12,6,9,20240406,2,'Montant_total');
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`) VALUES (13,7,8,20240407,1,'Montant_total');
+
+INSERT INTO `commandes`(`commandes_id  `, `client_id`, `produit_id , `Datedecommande`,'quantité','Montanttotal) VALUES ('11','7','11;,'20240407,'1','540000');
+
+SELECT `commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total` FROM `commandes` WHERE 1;
+pxix du prodiut acheté par le client_id(6) ; Produit_id(9)= 2X15000=30000    client Assata ; prodiuit Gadjet minicamera
+prix du produit acheté par le client_id_(7); produit_id(8)= 1x8000=8000      client Soukeye ; produit Widget boitiergeoloc
+
+UPDATE `commandes` SET `commandes_id`=12,`Montant_total`='30000' WHERE commandes_id=12;
+UPDATE `commandes` SET `commandes_id`=13,`Montant_total`='8000' WHERE commandes_id=12;
+
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]')
+
+Écrivez une requête pour récupérer les noms des clients qui ont passé une commande pour au moins un gadget, ainsi que le coût total des gadgets commandés par chaque client.
+  SELECT * FROM `client` INNER JOIN commandes ON commandes.client_id=client.client_id;
 
 
-
-INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `quantite`, `Datedecommande`,'Montanttotal) VALUES ('12','6','9','2','20240406','30000');
-INSERT INTO `commandes`(`commandes_id  `, `client_id`, `produit_id * `, `quantite`, `Datedecommande`,'Montanttotal) VALUES ('13','7',"11;9",'1','20240407','540000');
-
-
+SELECT * FROM `client` WHERE client_id=6;
+SELECT * FROM `client` WHERE client_id=7;
+SELECT * FROM `client` WHERE client_id=11;
