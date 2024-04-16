@@ -48,12 +48,14 @@ Quantité totale de vin produit portant le num 12
 SELECT Quantity FROM `harvest` WHERE producer_id=12;
 
 La quantité de vin produite par catégorie.
+SELECT SUM(quantity)AS quantitytotal FROM harvest;
+
 
  INSERT INTO `wine`(`WINE_id`, `Categorie`, `Year`, `Degree`) VALUES ('12','VinRouge',1990,80);
 INSERT INTO `wine`(`WINE_id`, `Categorie`, `Year`, `Degree`) VALUES ('13','Champagne',2000,80);
 
-
-
+SELECT Categirie* FROM WINE INNER JOIN harvest ON Harvest.WINE_id=WiNE.WINE_id;
+SELECT 'Quantity FROM harvest INNER JOINT WINE ON Harvest.Quantity=WINE.Categorie
 
 SELECT ALL Quantity FROM harvest INNER JOIN WINE ON Categorie;
 
