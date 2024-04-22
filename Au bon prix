@@ -1,3 +1,4 @@
+                  
 CREATE TABLE client (
     client_id INT PRIMARY KEY AUTO_INCREMENT,
     nom_client VARCHAR(100)NOT NULL,
@@ -13,53 +14,146 @@ CREATE TABLE Produit(
        
 CREATE TABLE Commandes(
     commandes_id INT PRIMARY KEY,
-   client_id INT NOT NULL,
-   produit_id INT NOT NULL,   
+   client_id INT ,
+   produit_id INT ,   
    CONSTRAINT FOREIGN KEY(client_id) REFERENCES client (client_id), 
    CONSTRAINT FOREIGN KEY(Produit_id) REFERENCES Produits(Produits_id),
    Datedecommande DATE NOT NULL,
-      quantite INT NOT NULL,
-  Montanttotal INT NOT NULL
+      quantite INT ,
+  Montanttotal INT
    );
 
 
-    INSERT INTO client(Client_id,nom_client,tel_client) VALUES ( 11,'Abdou',+221775000000);
+    INSERT INTO client(Client_id,nom_client,tel_client) 
+        VALUES ( 11,'Abdou',+221775000000);
 
 
-    INSERT INTO client(Client_id,nom_client,tel_client) VALUES (6,'Assata',+221767205556);
+    INSERT INTO client(Client_id,nom_client,tel_client) 
+        VALUES (6,'Assata',+221767205556);
 
 
-    INSERT INTO client(Client_id,nom_client,tel_client) VALUES (7,'Soukeye',+221789999999);
-
-
-
-INSERT INTO produit(produit_id,nom_produit,categorie,prix) VALUES(8,'boitiergeoloc','Widgets',8000);
-
-
-INSERT INTO produit(produit_id,nom_produit,categorie,prix) VALUES(9,'minicamera','Gadjet',15000);
+    INSERT INTO client(Client_id,nom_client,tel_client)
+         VALUES (7,'Soukeye',+221789999999);
 
 
 
+  INTO produit(produit_id,nom_produit,categorie,prix) 
+     VALUES(8,'boitiergeoloc','Widgets',8000);
 
 
-INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`) VALUES (12,6,9,20240406,2,'Montant_total');
-INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`) VALUES (13,7,8,20240407,1,'Montant_total');
+  INSERT INTO produit(produit_id,nom_produit,categorie,prix)
+      VALUES(9,'minicamera','Gadjet',15000)
 
-INSERT INTO `commandes`(`commandes_id  `, `client_id`, `produit_id , `Datedecommande`,'quantité','Montanttotal) VALUES ('11','7','11;,'20240407,'1','540000');
 
-SELECT `commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total` FROM `commandes` WHERE 1;
-pxix du prodiut acheté par le client_id(6) ; Produit_id(9)= 2X15000=30000    client Assata ; prodiuit Gadjet minicamera
-prix du produit acheté par le client_id_(7); produit_id(8)= 1x8000=8000      client Soukeye ; produit Widget boitiergeoloc
 
-UPDATE `commandes` SET `commandes_id`=12,`Montant_total`='30000' WHERE commandes_id=12;
-UPDATE `commandes` SET `commandes_id`=13,`Montant_total`='8000' WHERE commandes_id=12;
 
-INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`) VALUES ('[value-1]','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]')
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`)
+
+     VALUES (12,6,9,20240406,2,'Montant_total');
+
+INSERT INTO `commandes`(`commandes_id`, `client_id`, `produit_id`, `Datedecommande`, `quantite`, `Montant_total`)
+ 
+     VALUES (13,7,8,20240407,1,'Montant_total');
+
+INSERT INTO `commandes`(`commandes_id  `, `client_id`, `produit_id , `Datedecommande`,'quantité','Montanttotal)
+
+    VALUES (11,6,8,'20240407,'2','540000');
+
+INSERT INTO `commandes`(`commandes_id  `, `client_id`, `produit_id , `Datedecommande`,'quantité','Montanttotal)
+
+      VALUES (11,11,9,'20240407,'3',montanttotal);)
+
+ 4) : Montant_total=quantite*prix
+
+SELECT client.nom_client,quantite*prix
+FROM client 
+INNER JOIN commandes ON client.client_id=commandes.client_id
+INNER JOIN produit ON commandes.produit_id =produit.produit_id
+Where categorie IN ('Widget','Gadget')
+GROUP BY client.client_id
+
+
+
+
+
 
 Écrivez une requête pour récupérer les noms des clients qui ont passé une commande pour au moins un gadget, ainsi que le coût total des gadgets commandés par chaque client.
-  SELECT * FROM `client` INNER JOIN commandes ON commandes.client_id=client.client_id;
+SELECT * FROM `client` INNER JOIN commandes ON commandes.client_id=client.client_id;
+
+SELECT client.client.nom,quantite*prix
+FROM client 
+INNER JOIN commandes ON client.client_id=commandes.client_id
+INNER JOIN produit ON commandes.produit_id =produit.produit_id
+Where categorie IN ('Widget','Gadget')
+GROUP BY client.client_id
 
 
-SELECT * FROM `client` WHERE client_id=6;
-SELECT * FROM `client` WHERE client_id=7;
-SELECT * FROM `client` WHERE client_id=11;
+  Écrivez une requête pour récupérer le nombre total de widgets et de gadgets commandés par chaque client,
+      ainsi que le coût total des commandes.
+
+ SELECT commandes.quantite,quantite*prix
+     FROM commandes
+    INNER JOIN produit ON commandes.quantite=produit.nom_produit
+    INNER JOIN client ON commandes.client_id=client.client_id
+    WHERE categorie IN ('Widget','Gadget')
+      GROUP BY produit.nom_produit
+SELECT commandes.quantite,quantite*prix FROM commandes INNER JOIN produit ON commandes.quantite=produit.nom_produit INNER JOIN client ON commandes.client_id=client.client_id WHERE categorie IN ('Widget','Gadget') GROUP BY produit.nom_produit;
+
+  Écrivez une requête pour récupérer les noms des produits qui ont été commandés par au moins un client,
+    ainsi que la quantité totale de chaque produit commandé
+    SELECT produit.nom_produit,commandes.quantite
+         FROM commandes 
+         INNER JOIN client ON commandes.client_id=client.client_id
+         INNER JOIN produit ON commandes.quantite= produit.produit_id
+         WHERE SUM (commandes.quantite)
+SELECT produit.nom_produit,commandes.quantite FROM commandes INNER JOIN client ON commandes.client_id=client.client_id INNER JOIN produit ON commandes.quantite= produit.produit_id WHERE commandes.quantite;
+
+
+ 9   Écrivez une requête pour récupérer les noms des clients qui ont passé le plus de commandes, 
+       ainsi que le nombre total de commandes passées par chaque client.
+     
+  SELECT client.nom_client AS NOM,COUNT(*)AS nombre_total
+   FROM client
+  JOIN commandes ON client.client_id= commandes.client_id
+   GROUP BY client.client_id,client.nom_client
+   ORDER BY COUNT(*) DESC 
+    LIMIT 1;
+
+
+SELECT client.nom_client AS NOM,COUNT(*)AS nombre_total FROM clienJOIN commandes ON client.client_id= commandes.client_id GROUP BY client.client_id,client.nom_client ORDER BY COUNT(*) DESC LIMIT 1;
+
+
+Écrivez une requête pour récupérer les noms des produits les plus commandés,
+      ainsi que la quantité totale de chaque produit commandé.
+  SELECT Produit.nom_produit AS jaune, SUM(commandes.quantite)AS quantite_total
+  FROM produit
+ JOIN commandes ON produit.produit_id=commandes.produit_id
+  GROUP BY produit.produit_id,produit.nom_produit
+ ORDER BY SUM(commandes.quantite)DESC;
+
+SELECT Produit.nom_produit AS jaune, SUM(commandes.quantite)AS quantite_total FROM produit JOIN commandes ON produit.produit_id=commandes.produit_id GROUP BY produit.produit_id,produit.nom_produit ORDER BY SUM(commandes.quantite)DESC;
+
+
+
+11  Écrivez une requête pour récupérer les noms des clients qui ont passé une commande chaque jour de la semaine, 
+       ainsi que le nombre total de commandes passées par chaque client.
+
+    SELECT client.nom_client,COUNT(*)AS commandes_total
+    FROM client 
+    join commandes ON  client.client_id = commandes.client.id
+    WHERE commandes_date=7
+     GROUP BY client.client_id,client.nom_client;
+
+
+SELECT client.nom_client,COUNT(*)AS commandes_total FROM client join commandes ON client.client_id = commandes.client_id WHERE datedecommande=7 GROUP BY client.client_id,client.nom_client;
+
+
+
+
+
+
+
+
+
+
+
